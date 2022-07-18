@@ -18,9 +18,9 @@ void i2c_init(void)
     TWBR = ((F_CPU / F_I2C) - 16) / 2; // baud rate factor 12
 }
 
-uint8_t i2c_tx_start(bool mode)
+unsigned int i2c_tx_start(bool mode)
 {
-    int8_t status = 0;
+    unsigned int status = 0;
     masterMode = mode; // set global state of R/W bit
 
     /* clear interrupt flag, issue start command (gain control of bus as
@@ -49,9 +49,9 @@ uint8_t i2c_tx_start(bool mode)
     return status;
 }
 
-uint8_t i2c_tx_address(uint8_t address)
+unsigned int i2c_tx_address(unsigned int address)
 {
-    int8_t status = 0;
+    unsigned int status = 0;
 
     TWDR = (address << 1) | masterMode;
     /* clear start command to release bus as master */
@@ -108,9 +108,9 @@ uint8_t i2c_tx_address(uint8_t address)
     return status;
 }
 
-uint8_t i2c_tx_byte(uint8_t byteData)
+unsigned int i2c_tx_byte(unsigned int byteData)
 {
-    int8_t status = 0;
+    unsigned int status = 0;
     TWDR  = byteData; // load data buffer with data to be transmitted
     TWCR |= (1 << TWINT); // clear interrupt flag
 
@@ -142,10 +142,10 @@ uint8_t i2c_tx_byte(uint8_t byteData)
     return status;
 }
 
-int8_t i2c_timeout(void)
+unsigned int i2c_timeout(void)
 {
-    uint8_t time = TIMEOUT;
-    int8_t status = BUS_DISCONNECTED;
+    unsigned int time = TIMEOUT;
+    int status = BUS_DISCONNECTED;
 
     while (time-- > 0) {
         /* check to see if bus is ready */
@@ -158,9 +158,9 @@ int8_t i2c_timeout(void)
     return status;
 }
 
-uint8_t i2c_rx_byte(bool response)
+unsigned int i2c_rx_byte(bool response)
 {
-    int8_t status;
+    int status;
 
     if (response == ACK) {
         TWCR |= (1 << TWEA); // generate ACK

@@ -4,7 +4,7 @@ CC=avr-gcc
 OBJCOPY=avr-objcopy
 CFLAGS=-std=c99 -Wall -g -Os -mmcu=${MCU} -DF_CPU=${F_CPU} -I. -Wl,-u,vfprintf -lprintf_flt -lm
 TARGET=gnss_output
-SRCS=gnss_output.c SSD1306.c i2c.c
+SRCS=gnss_output.c SSD1306.c i2c.c myserial.c ring_buff.c 
 
 all:
 	${CC} ${CFLAGS} -o ${TARGET}.bin ${SRCS}

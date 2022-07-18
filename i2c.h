@@ -20,7 +20,7 @@
 #define ACK 0
 #define TIMEOUT 50
 
-typedef uint8_t bool;
+typedef unsigned int bool;
 
 /*
  * Initialize I2C as bus master
@@ -47,7 +47,7 @@ void i2c_init(void);
  * Returns:
  *     Transmission status code.
  */
-uint8_t i2c_tx_start(bool mode);
+unsigned int i2c_tx_start(bool mode);
 
 /*
  * Transmit slave address
@@ -64,7 +64,7 @@ uint8_t i2c_tx_start(bool mode);
  * Returns:
  *     Transmission status code
  */
-uint8_t i2c_tx_address(uint8_t address);
+unsigned int i2c_tx_address(unsigned int address);
 
 /*
  * Transmit byte of data
@@ -81,7 +81,7 @@ uint8_t i2c_tx_address(uint8_t address);
  * Returns:
  *     Transmission status code
  */
-uint8_t i2c_tx_byte(uint8_t byteData);
+unsigned int i2c_tx_byte(unsigned int byteData);
 
 /*
  * I2C Timeout
@@ -89,7 +89,7 @@ uint8_t i2c_tx_byte(uint8_t byteData);
  * Returns:
  *     Timeout status
  */
-int8_t i2c_timeout(void);
+unsigned int i2c_timeout(void);
 
 /*
  * Receive byte of data
@@ -105,7 +105,7 @@ int8_t i2c_timeout(void);
  * Returns:
  *     One byte of data, or transmission status code
  */
-uint8_t i2c_rx_byte(bool acknack);
+unsigned int i2c_rx_byte(bool acknack);
 
 /*
  * Transmit stop condition
